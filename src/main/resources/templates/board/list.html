@@ -1,18 +1,52 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/common :: head">
+
+<!--<head th:replace="fragments/common :: head"> 옛날문법, 아래가 최신-->
+<head th:replace="~{fragments/common :: head}">
 </head>
+
 <body>
-<h1></h1>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <h1></h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" th:replace="~{fragments/common :: menu('board')}">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" th:replace="~{fragments/common :: menu('board')}">
 
-</nav>
-<main class="container">
-    <div class="bg-body-tertiary p-5 rounded">
-        <h1>게시판</h1>
-    </div>
-</main>
+    </nav>
+    <main class="container">
+        <div class="bg-body-tertiary p-5 rounded">
+            <h2>게시판</h2>
+            <div>
+                총 건수 : <span th:text="${#lists.size(boards)}">2</span>
+            </div>
+            <!-- <table class="table">/ -->
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성자</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr> -->
+                  <tr th:each="board : ${boards}">
+                    <td th:text="${board.id}">Jacob</td>
+                    <!-- <td th:text="${board.title}">Thornton</td> -->
+                    <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}">Thornton</a></td>
+                    <td>홍길동</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-end">
+                <!-- <button type="button" class="btn btn-primary" th:href="@{/board/form}">쓰기</button> -->
+                <a type="button" class="btn btn-primary" th:href="@{/board/form}">쓰기</a>
+              </p>
+              
+
+        </div>
+    </main>
 </body>
+
 </html>
