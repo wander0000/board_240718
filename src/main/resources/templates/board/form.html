@@ -32,7 +32,13 @@
 
               <label for="content" class="form-label">내용</label>
               <!-- <textarea class="form-control" id="content" rows="3" name="content" th:text="*{content}"></textarea> -->
-              <textarea class="form-control" id="content" rows="3" name="content" th:field="*{content}"></textarea>
+              <!-- <textarea class="form-control" id="content" rows="3" name="content" th:field="*{content}"></textarea> -->
+              <textarea class="form-control" th:classappend="${#fields.hasErrors('content')}? 'is-invalid'" id="content" rows="3" name="content" th:field="*{content}"></textarea>
+
+              <div class="invalid-feedback" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
+                내용 에러 메시지
+              </div>
+
             </div>
             <p class="text-end">
               <button type="submit" class="btn btn-primary">확인</button>
